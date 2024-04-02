@@ -76,6 +76,11 @@
 					hash {
 						algo = "sha256";
 					};
+
+					signature {
+						algo = "sha256,rsa2048";
+						key-name-hint = "dev";
+					};
 #endif
 				};
 
@@ -97,6 +102,11 @@
 					hash {
 						algo = "sha256";
 					};
+
+					signature {
+						algo = "sha256,rsa2048";
+						key-name-hint = "dev";
+					};
 #endif
 				};
 				@tee-SEQ {
@@ -117,6 +127,11 @@
 					hash {
 						algo = "sha256";
 					};
+
+					signature {
+						algo = "sha256,rsa2048";
+						key-name-hint = "dev";
+					};
 #endif
 				};
 #else
@@ -135,6 +150,11 @@
 					hash {
 						algo = "sha256";
 					};
+
+					signature {
+						algo = "sha256,rsa2048";
+						key-name-hint = "dev";
+					};
 #endif
 				};
 #endif
@@ -146,6 +166,11 @@
 #ifdef CONFIG_SPL_FIT_SIGNATURE
 					hash {
 						algo = "sha256";
+					};
+
+					signature {
+						algo = "sha256,rsa2048";
+						key-name-hint = "dev";
 					};
 #endif
 				};
@@ -162,6 +187,14 @@
 					fit,firmware = "op-tee", "u-boot";
 #endif
 					fit,loadables;
+
+					/*
+					signature {
+						algo = "sha256,rsa2048";
+						key-name-hint = "dev";
+						sign-images = "fdt", "firmware", "loadables";
+					};
+					*/
 				};
 			};
 		};
