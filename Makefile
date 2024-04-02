@@ -1122,6 +1122,9 @@ endef
 .binman_stamp: $(INPUTS-y) FORCE
 ifeq ($(CONFIG_BINMAN),y)
 	$(call if_changed,binman)
+ifeq ($(CONFIG_SIGN_UBOOT),y)
+	$(objtree)/tools/mkimage -F -k $(objtree) u-boot.itb
+endif
 endif
 	@touch $@
 

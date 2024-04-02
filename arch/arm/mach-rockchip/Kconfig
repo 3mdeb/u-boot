@@ -520,6 +520,51 @@ config ROCKCHIP_SPI_IMAGE
 config LNX_KRNL_IMG_TEXT_OFFSET_BASE
 	default TEXT_BASE
 
+menuconfig SIGN_UBOOT
+	bool	"Sign U-Boot"
+	depends on SPL_FIT_SIGNATURE
+
+if SIGN_UBOOT
+
+config KEY_HINT_NAME
+	string	"Key hint name"
+	default "dev"
+	help
+	  Private key: CONFIG_KEY_HINT_NAME.key
+	  Certificate: CONFIG_KEY_HINT_NAME.crt
+
+choice
+	prompt "Which part of U-Boot to sign"
+
+config SIGN_UBOOT_CONF
+	bool	"Sign configuration"
+
+config SIGN_UBOOT_IMAGES
+	bool	"Sign images"
+
+endchoice
+
+config SPL_ADD_PUBLIC_KEY
+	bool	"Add public key to SPL dtb"
+	default n
+
+choice SIGN_SIGNING_ALGORITHM
+	prompt "Crypto algorithm used when signing"
+	default	SIGN_SIGNING_ALGORITHM_SHA256_RSA2048
+
+	config SIGN_SIGNING_ALGORITHM_SHA1_RSA2048
+		bool "SHA1, RSA2048"
+	config SIGN_SIGNING_ALGORITHM_SHA256_RSA2048
+		bool "SHA256, RSA2048"
+endchoice
+
+config SIGN_SIGNING_ALGORITHM
+	string
+	default "sha1,rsa2048" if SIGN_SIGNING_ALGORITHM_SHA1_RSA2048
+	default "sha256,rsa2048" if SIGN_SIGNING_ALGORITHM_SHA256_RSA2048
+
+endif # SIGN_UBOOT
+
 source "arch/arm/mach-rockchip/px30/Kconfig"
 source "arch/arm/mach-rockchip/rk3036/Kconfig"
 source "arch/arm/mach-rockchip/rk3066/Kconfig"
