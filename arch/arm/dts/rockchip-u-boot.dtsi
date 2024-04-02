@@ -30,6 +30,11 @@
 			};
 #endif
 			u-boot-spl {
+                u_boot_spl_pubkey_dtb {
+                    algo = "sha256,rsa4096";
+                    required = "image";
+                    key-name-hint = "dev";
+                };
 			};
 		};
 
