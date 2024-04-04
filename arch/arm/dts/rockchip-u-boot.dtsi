@@ -30,11 +30,6 @@
 			};
 #endif
 			u-boot-spl {
-                u_boot_spl_pubkey_dtb {
-                    algo = "sha256,rsa4096";
-                    required = "image";
-                    key-name-hint = "dev";
-                };
 			};
 		};
 
@@ -82,10 +77,12 @@
 						algo = "sha256";
 					};
 
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
 					signature {
-						algo = "sha256,rsa2048";
-						key-name-hint = "dev";
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
 					};
+#endif
 #endif
 				};
 
@@ -108,10 +105,12 @@
 						algo = "sha256";
 					};
 
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
 					signature {
-						algo = "sha256,rsa2048";
-						key-name-hint = "dev";
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
 					};
+#endif
 #endif
 				};
 				@tee-SEQ {
@@ -133,10 +132,12 @@
 						algo = "sha256";
 					};
 
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
 					signature {
-						algo = "sha256,rsa2048";
-						key-name-hint = "dev";
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
 					};
+#endif
 #endif
 				};
 #else
@@ -156,10 +157,12 @@
 						algo = "sha256";
 					};
 
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
 					signature {
-						algo = "sha256,rsa2048";
-						key-name-hint = "dev";
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
 					};
+#endif
 #endif
 				};
 #endif
@@ -173,10 +176,12 @@
 						algo = "sha256";
 					};
 
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
 					signature {
-						algo = "sha256,rsa2048";
-						key-name-hint = "dev";
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
 					};
+#endif
 #endif
 				};
 			};
@@ -193,13 +198,13 @@
 #endif
 					fit,loadables;
 
-					/*
+#ifdef CONFIG_SIGN_UBOOT_CONF
 					signature {
-						algo = "sha256,rsa2048";
-						key-name-hint = "dev";
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
 						sign-images = "fdt", "firmware", "loadables";
 					};
-					*/
+#endif
 				};
 			};
 		};
