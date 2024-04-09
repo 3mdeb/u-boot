@@ -19,9 +19,6 @@ endif
 $(obj)/dt-$(SPL_NAME).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
 	mkdir -p $(dir $@)
 	$(call if_changed,fdtgrep)
-ifeq ($(CONFIG_SPL_ADD_PUBLIC_KEY),y)
-	$(call if_changed,fdt_add_pubkey)
-endif
 
 ifeq ($(CONFIG_OF_DTB_PROPS_REMOVE),y)
 $(obj)/dt.dtb: $(DTB) $(objtree)/tools/fdtgrep FORCE

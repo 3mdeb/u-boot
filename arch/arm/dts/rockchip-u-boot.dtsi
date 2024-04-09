@@ -30,6 +30,21 @@
 			};
 #endif
 			u-boot-spl {
+#ifdef CONFIG_SPL_ADD_PUBLIC_KEY
+			    type = "section";
+
+			    u-boot-spl-nodtb {
+			    };
+			    u-boot-spl-pubkey-dtb {
+			        algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+					key-name-hint = CONFIG_KEY_HINT_NAME;
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					required = "image";
+#else
+					required = "conf";
+#endif
+			    };
+#endif
 			};
 		};
 

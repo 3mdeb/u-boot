@@ -691,14 +691,3 @@ define filechk_offsets
 	 echo ""; \
 	 echo "#endif" )
 endef
-
-ifeq ($(CONFIG_SIGN_UBOOT_IMAGES),y)
-spl_require_value=image
-else
-spl_require_value=conf
-endif
-
-quiet_cmd_fdt_add_pubkey = FDT_ADD_PUBKEY $@
-      cmd_fdt_add_pubkey = $(objtree)/tools/fdt_add_pubkey \
-	    -a $(CONFIG_SIGN_SIGNING_ALGORITHM) -k $(CONFIG_KEY_DIRECTORY) \
-		-r $(spl_require_value) -n $(CONFIG_KEY_HINT_NAME) $@

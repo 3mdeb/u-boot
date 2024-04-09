@@ -534,18 +534,12 @@ menuconfig SIGN_UBOOT
 
 if SIGN_UBOOT
 
-config KEY_DIRECTORY
-	string	"Key directory"
-	default "."
-	help
-	  Directory in which to look for keys
-
 config KEY_HINT_NAME
 	string	"Key hint name"
 	default "dev"
 	help
-	  Private key: CONFIG_KEY_NAME.key
-	  Certificate: CONFIG_KEY_NAME.crt
+	  Private key: CONFIG_KEY_HINT_NAME.key
+	  Certificate: CONFIG_KEY_HINT_NAME.crt
 
 choice
 	prompt "Which part of U-Boot to sign"
