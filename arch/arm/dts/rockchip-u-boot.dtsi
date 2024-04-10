@@ -30,6 +30,21 @@
 			};
 #endif
 			u-boot-spl {
+#ifdef CONFIG_SPL_ADD_PUBLIC_KEY
+			    type = "section";
+
+			    u-boot-spl-nodtb {
+			    };
+			    u-boot-spl-pubkey-dtb {
+			        algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+					key-name-hint = CONFIG_KEY_HINT_NAME;
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					required = "image";
+#else
+					required = "conf";
+#endif
+			    };
+#endif
 			};
 		};
 
@@ -76,6 +91,13 @@
 					hash {
 						algo = "sha256";
 					};
+
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					signature {
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
+					};
+#endif
 #endif
 				};
 
@@ -97,6 +119,13 @@
 					hash {
 						algo = "sha256";
 					};
+
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					signature {
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
+					};
+#endif
 #endif
 				};
 				@tee-SEQ {
@@ -117,6 +146,13 @@
 					hash {
 						algo = "sha256";
 					};
+
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					signature {
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
+					};
+#endif
 #endif
 				};
 #else
@@ -135,6 +171,13 @@
 					hash {
 						algo = "sha256";
 					};
+
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					signature {
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
+					};
+#endif
 #endif
 				};
 #endif
@@ -147,6 +190,13 @@
 					hash {
 						algo = "sha256";
 					};
+
+#ifdef CONFIG_SIGN_UBOOT_IMAGES
+					signature {
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
+					};
+#endif
 #endif
 				};
 			};
@@ -162,6 +212,14 @@
 					fit,firmware = "op-tee", "u-boot";
 #endif
 					fit,loadables;
+
+#ifdef CONFIG_SIGN_UBOOT_CONF
+					signature {
+						algo = CONFIG_SIGN_SIGNING_ALGORITHM;
+						key-name-hint = CONFIG_KEY_HINT_NAME;
+						sign-images = "fdt", "firmware", "loadables";
+					};
+#endif
 				};
 			};
 		};
